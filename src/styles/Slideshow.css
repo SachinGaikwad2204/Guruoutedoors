@@ -1,0 +1,163 @@
+html {
+  scroll-behavior: smooth;
+}
+
+.slideshow {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  scroll-behavior: smooth;
+}
+
+.slideshow-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.slide {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+  transition: opacity 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+.slide.active {
+  display: block;
+  opacity: 1;
+}
+
+.slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+.slide.active .slide-image {
+  transform: scale(1.03);
+  opacity: 1;
+}
+
+/* Only for Slide 1 */
+.custom-slide-content {
+  position: absolute;
+  top: 20%;
+  left: 10%;
+  max-width: 40%;
+  z-index: 10;
+  color: #001b4e;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.custom-subtitle {
+  font-size: 1.2rem;
+  color: #5f5f5f;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  white-space: pre-line;
+}
+
+.custom-title {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #001b4e;
+  line-height: 1.2;
+  margin-bottom: 2rem;
+}
+
+.custom-button {
+  background-color: white;
+  color: #001b4e;
+  border: none;
+  font-weight: bold;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.custom-button:hover {
+  background-color: #f0f0f0;
+}
+
+.slide-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 10px 15px;
+  z-index: 10;
+  scroll-behavior: smooth;
+}
+
+.slide-nav.prev {
+  left: 10px;
+}
+
+.slide-nav.next {
+  right: 10px;
+}
+
+.slide-indicators {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 10;
+  scroll-behavior: smooth;
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  background: #ccc;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.indicator.active {
+  background: #333;
+}
+
+.image-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #333;
+  font-size: 1rem;
+}
+
+.loading-spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #333;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: auto;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
