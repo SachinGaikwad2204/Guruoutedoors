@@ -18,8 +18,6 @@ const Navbar = () => {
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
 
-  const isActive = (path) => location.pathname === path ? 'active' : '';
-
   return (
     <nav style={{ position: 'fixed', top: 0, width: '100%', zIndex: 1000, background: scrolled ? 'rgba(10, 10, 10, 0.95)' : 'transparent', backdropFilter: scrolled ? 'blur(10px)' : 'none', transition: 'all 0.3s ease', boxShadow: scrolled ? '0 2px 20px rgba(0, 0, 0, 0.3)' : 'none' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px 30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
