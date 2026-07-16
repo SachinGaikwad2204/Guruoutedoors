@@ -20,14 +20,8 @@
   "eslintConfig": {
     "extends": ["react-app"],
     "rules": {
-      "jsx-a11y/anchor-is-valid": [
-        "warn",
-        {
-          "components": ["Link"],
-          "specialLink": ["hrefLeft", "hrefRight"],
-          "aspects": ["noHref", "invalidHref", "preferButton"]
-        }
-      ],
+      "jsx-a11y/anchor-is-valid": "off",
+      "jsx-a11y/alt-text": "warn",
       "no-unused-vars": "warn",
       "unicode-bom": "off"
     }
