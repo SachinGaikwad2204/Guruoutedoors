@@ -15,7 +15,7 @@ const Footer = () => {
           <Link to="/about" style={{ color: '#666', textDecoration: 'none', fontSize: '0.9rem' }}>About</Link>
           <Link to="/projects" style={{ color: '#666', textDecoration: 'none', fontSize: '0.9rem' }}>Projects</Link>
           <Link to="/contact" style={{ color: '#666', textDecoration: 'none', fontSize: '0.9rem' }}>Contact</Link>
-          <a href="https://github.com/SachinGaikwad2204" target="_blank" rel="noreferrer" style={{ color: '#666', textDecoration: 'none', fontSize: '0.9rem' }}>GitHub</a>
+          <a href="https://github.com/SachinGaikwad2204" target="_blank" rel="noopener noreferrer" style={{ color: '#666', textDecoration: 'none', fontSize: '0.9rem' }}>GitHub</a>
         </div>
       </div>
     </footer>

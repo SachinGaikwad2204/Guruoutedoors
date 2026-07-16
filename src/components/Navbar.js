@@ -1,115 +1,45 @@
-// File: src/components/Navbar.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import '../styles/Navbar.css';
-
-// Import your logo
-import logo from '../assets/Guru Outdoors LOGO.png';
+import { FaBars, FaTimes } from 'react-icons/fa';
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
+  const toggleMenu = () => setIsOpen(!isOpen);
+  const closeMenu = () => setIsOpen(false);
 
-  // Check if a nav item is active
-  const isActive = (path) => {
-    return location.pathname === path ? 'active' : '';
-  };
+  const isActive = (path) => location.pathname === path ? 'active' : '';
 
   return (
-    <nav className="navbar">
-      <div className="nav-container">
-        <div className="brand">
-          <Link to="/" onClick={closeMenu} className="brand-link">
-            <img src={logo} alt="Guru Outdoors" className="logo" />
+    <nav style={{ position: 'fixed', top: 0, width: '100%', zIndex: 1000, background: scrolled ? 'rgba(10, 10, 10, 0.95)' : 'transparent', backdropFilter: scrolled ? 'blur(10px)' : 'none', transition: 'all 0.3s ease', boxShadow: scrolled ? '0 2px 20px rgba(0, 0, 0, 0.3)' : 'none' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px 30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ fontSize: '1.8rem', fontWeight: 'bold' }}>
+          <Link to="/" style={{ textDecoration: 'none', background: 'linear-gradient(135deg, #64f4ab, #3b82f6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', letterSpacing: '2px' }} onClick={closeMenu}>
+            SG
           </Link>
-          <span className="brand-tagline">'We Turn Heads.</span>
         </div>
         
-        <button className={`mobile-toggle ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+        <div style={{ display: 'flex', gap: '35px', alignItems: 'center' }}>
+          <Link to="/" style={{ color: '#fff', textDecoration: 'none', fontSize: '1rem', fontWeight: '500', transition: 'all 0.3s ease', padding: '5px 0', borderBottom: location.pathname === '/' ? '2px solid #64f4ab' : 'none' }} onClick={closeMenu}>Home</Link>
+          <Link to="/about" style={{ color: '#fff', textDecoration: 'none', fontSize: '1rem', fontWeight: '500', transition: 'all 0.3s ease', padding: '5px 0', borderBottom: location.pathname === '/about' ? '2px solid #64f4ab' : 'none' }} onClick={closeMenu}>About</Link>
+          <Link to="/skills" style={{ color: '#fff', textDecoration: 'none', fontSize: '1rem', fontWeight: '500', transition: 'all 0.3s ease', padding: '5px 0', borderBottom: location.pathname === '/skills' ? '2px solid #64f4ab' : 'none' }} onClick={closeMenu}>Skills</Link>
+          <Link to="/projects" style={{ color: '#fff', textDecoration: 'none', fontSize: '1rem', fontWeight: '500', transition: 'all 0.3s ease', padding: '5px 0', borderBottom: location.pathname === '/projects' ? '2px solid #64f4ab' : 'none' }} onClick={closeMenu}>Projects</Link>
+          <Link to="/contact" style={{ color: '#fff', textDecoration: 'none', fontSize: '1rem', fontWeight: '500', transition: 'all 0.3s ease', padding: '5px 0', borderBottom: location.pathname === '/contact' ? '2px solid #64f4ab' : 'none' }} onClick={closeMenu}>Contact</Link>
+        </div>
         
-        <ul className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
-          <li className="nav-item">
-            <Link 
-              to="/" 
-              className={`nav-link ${isActive('/')}`}
-              onClick={closeMenu}
-            >
-              HOME
-            </Link>
-          </li>
-          <li className="separator">|</li>
-          <li className="nav-item">
-            <Link 
-              to="/about" 
-              className={`nav-link ${isActive('/about')}`}
-              onClick={closeMenu}
-            >
-              ABOUT US
-            </Link>
-          </li>
-          <li className="separator">|</li>
-          <li className="nav-item">
-            <Link 
-              to="/services" 
-              className={`nav-link ${isActive('/services')}`}
-              onClick={closeMenu}
-            >
-              SERVICES
-            </Link>
-          </li>
-          <li className="separator">|</li>
-          <li className="nav-item">
-            <Link 
-              to="/gallery" 
-              className={`nav-link ${isActive('/gallery')}`}
-              onClick={closeMenu}
-            >
-              GALLERY
-            </Link>
-          </li>
-          <li className="separator">|</li>
-          <li className="nav-item">
-            <Link 
-              to="/contact" 
-              className={`nav-link ${isActive('/contact')}`}
-              onClick={closeMenu}
-            >
-              CONTACT US
-            </Link>
-          </li>
-          <li className="separator">|</li>
-          <li className="nav-item">
-            <Link 
-              to="/careers" 
-              className={`nav-link ${isActive('/careers')}`}
-              onClick={closeMenu}
-            >
-              CAREERS
-            </Link>
-          </li>
-          <li className="separator">|</li>
-          <li className="nav-item">
-            <Link 
-              to="/partner" 
-              className={`nav-link ${isActive('/partner')}`}
-              onClick={closeMenu}
-            >
-              BE OUR PARTNER
-            </Link>
-          </li>
-        </ul>
+        <button onClick={toggleMenu} style={{ display: 'none', color: '#fff', fontSize: '1.8rem', cursor: 'pointer', background: 'none', border: 'none' }}>
+          {isOpen ? <FaTimes /> : <FaBars />}
+        </button>
       </div>
     </nav>
   );
